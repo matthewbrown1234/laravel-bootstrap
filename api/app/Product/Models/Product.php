@@ -26,7 +26,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Product wherePrice($value)
  * @method static Builder<static>|Product whereUpdatedAt($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Product extends Model
 {
