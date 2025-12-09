@@ -8,6 +8,7 @@ use App\Product\Models\Product;
 use App\Product\Requests\StoreProductRequest;
 use App\Product\Requests\UpdateProductRequest;
 use App\Product\Resources\ProductCollection;
+use App\Product\Resources\ProductResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -18,12 +19,11 @@ class ProductController extends ApiController
      */
     public function index(SearchPaginationRequest $request): ProductCollection
     {
-        $products = Product::query()->paginate(
-            perPage: $request->getPerPage(),
-            page: $request->getPage(),
-        );
-
-        return new ProductCollection($products);
+        return new ProductCollection(
+            Product::query()->paginate(
+                perPage: $request->getPerPage(),
+                page: $request->getPage(),
+            ));
     }
 
     /**
@@ -40,9 +40,9 @@ class ProductController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Product $product): Response|JsonResponse
+    public function show(Product $product): ProductResource
     {
-        return $this->respond($product);
+        return new ProductResource($product);
     }
 
     /**
