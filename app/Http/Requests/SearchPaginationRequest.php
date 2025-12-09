@@ -6,8 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class SearchPaginationRequest extends FormRequest
 {
-    public function pagination(): PaginationData
+    public function rules(): array
     {
-        return PaginationData::fromRequest($this);
+        return [
+            'page' => ['nullable', 'integer', 'min:1'],
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+        ];
+    }
+
+    public function getPage(): int
+    {
+        return $this->query('page', 1);
+    }
+
+    public function getPerPage(): int
+    {
+        return $this->query('per_page', 10);
     }
 }
