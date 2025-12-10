@@ -9,27 +9,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * @property int $id
+ * @property string $id
+ * @property string $order_id
  * @property string $external_id
  * @property int $sub_total four decimal places
  * @property int $total four decimal places
- * @property string $status
+ * @property \App\Domains\Order\Models\InvoiceStatus $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Order\Models\Order $order
+ * @method static \Database\Factories\Domains\Order\Models\InvoiceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereExternalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereOrderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereSubTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereUpdatedAt($value)
- * @property-read \App\Domains\Order\Models\Order|null $order
- * @property string $order_id
- * @method static \Database\Factories\Domains\Order\Models\InvoiceFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Invoice whereOrderId($value)
  * @mixin \Eloquent
  */
 class Invoice extends Model

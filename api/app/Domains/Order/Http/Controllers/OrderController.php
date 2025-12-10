@@ -2,65 +2,28 @@
 
 namespace App\Domains\Order\Http\Controllers;
 
-use App\Domains\Order\Http\Requests\StoreOrderRequest;
-use App\Domains\Order\Http\Requests\UpdateOrderRequest;
+use App\Domains\Order\Http\Resources\OrderCollection;
+use App\Domains\Order\Http\Resources\OrderDetailResource;
 use App\Domains\Order\Models\Order;
+use App\Http\Requests\SearchPaginationRequest;
 
 class OrderController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SearchPaginationRequest $request)
     {
-        //
+        return new OrderCollection(
+            Order::query()->paginate(
+                perPage: $request->getPerPage(),
+                page: $request->getPage(),
+            )
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreOrderRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Order $order)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOrderRequest $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return new OrderDetailResource($order->load('invoices'));
     }
 }

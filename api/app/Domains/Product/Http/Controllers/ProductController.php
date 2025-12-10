@@ -5,10 +5,9 @@ namespace App\Domains\Product\Http\Controllers;
 use App\Domains\Product\Http\Resources\ProductCollection;
 use App\Domains\Product\Http\Resources\ProductResource;
 use App\Domains\Product\Models\Product;
-use App\Http\Controllers\ApiController;
 use App\Http\Requests\SearchPaginationRequest;
 
-class ProductController extends ApiController
+class ProductController
 {
     /**
      * Display a listing of the resource.

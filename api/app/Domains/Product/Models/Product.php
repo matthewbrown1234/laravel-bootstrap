@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property int $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @method static \Database\Factories\Domains\Product\Models\ProductFactory factory($count = null, $state = [])
  * @method static Builder<static>|Product newModelQuery()
  * @method static Builder<static>|Product newQuery()
  * @method static Builder<static>|Product query()
