@@ -1,14 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Domains\Product\Models;
 
+use App\Domains\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Product\Models\Product>
+ * @extends Factory<Product>
  */
 class ProductFactory extends Factory
 {
+    protected $model = Product::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +21,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
-            'price' => $this->faker->randomNumber(),
+            'price' => $this->faker->numberBetween(1000, 1_000_000_000_0000),
         ];
     }
 }

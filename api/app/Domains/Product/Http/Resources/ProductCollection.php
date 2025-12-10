@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Product\Resources;
+namespace App\Domains\Product\Http\Resources;
 
-use App\Product\Models\Product;
+use App\Domains\Product\Models\Product;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /** @extends ResourceCollection<Product> */

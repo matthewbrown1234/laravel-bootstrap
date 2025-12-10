@@ -1,6 +1,6 @@
 <?php
 
-use App\Product\Controllers\ProductController;
+use App\Domains\Product\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth:sanctum')->group(function () {

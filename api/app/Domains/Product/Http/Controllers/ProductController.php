@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Product\Controllers;
+namespace App\Domains\Product\Http\Controllers;
 
+use App\Domains\Product\Http\Resources\ProductCollection;
+use App\Domains\Product\Http\Resources\ProductResource;
+use App\Domains\Product\Models\Product;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SearchPaginationRequest;
-use App\Product\Models\Product;
-use App\Product\Resources\ProductCollection;
-use App\Product\Resources\ProductResource;
 
 class ProductController extends ApiController
 {

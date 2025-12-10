@@ -14,5 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            Order\OrderSeeder::class,
+            Product\ProductSeeder::class,
+        ]);
     }
 }

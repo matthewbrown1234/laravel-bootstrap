@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Product\Models;
+namespace App\Domains\Product\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -15,7 +15,6 @@ use Illuminate\Support\Carbon;
  * @property int $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @method static Builder<static>|Product newModelQuery()
  * @method static Builder<static>|Product newQuery()
  * @method static Builder<static>|Product query()
@@ -25,14 +24,14 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Product whereName($value)
  * @method static Builder<static>|Product wherePrice($value)
  * @method static Builder<static>|Product whereUpdatedAt($value)
- *
- * @mixin Eloquent
+ * @mixin \Eloquent
  */
 class Product extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $casts = [
-        'price' => 'integer',
-    ];
+    public function priceToFloat(): float
+    {
+        return $this->price / 100;
+    }
 }

@@ -32,12 +32,14 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "App\\Domains\\": "app/Domains/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "App\\Domains\\": "app/Domains/"
         }
     },
     "scripts": {
@@ -68,9 +70,6 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ],
-        "open-api": [
-            "@php artisan scramble:export --path=./storage/api/api.json"
         ]
     },
     "extra": {

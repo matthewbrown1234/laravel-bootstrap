@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Product\Resources;
+namespace App\Domains\Product\Http\Resources;
 
-use App\Product\Models\Product;
+use App\Domains\Product\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +18,7 @@ class ProductResource extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
-            'price' => (float) ($this->resource->price / 100),
+            'price' => $this->resource->priceToFloat(),
             'createdAt' => $this->resource->created_at,
             'updatedAt' => $this->resource->updated_at,
         ];
