@@ -18,7 +18,7 @@ class ProductResource extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
-            'price' => floatval($this->resource->price * .01),
+            'price' => (float) ($this->resource->price / 100),
             'createdAt' => $this->resource->created_at,
             'updatedAt' => $this->resource->updated_at,
         ];

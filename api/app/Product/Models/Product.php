@@ -31,4 +31,8 @@ use Illuminate\Support\Carbon;
 class Product extends Model
 {
     use HasFactory, HasUlids;
+
+    protected $casts = [
+        'price' => 'integer',
+    ];
 }
