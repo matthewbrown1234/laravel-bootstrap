@@ -10,7 +10,7 @@ class SearchPaginationRequest extends FormRequest
     {
         return [
             'page' => ['nullable', 'integer', 'min:1'],
-            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'perPage' => ['nullable', 'integer', 'min:1', 'max:100'],
         ];
     }
 
@@ -21,6 +21,6 @@ class SearchPaginationRequest extends FormRequest
 
     public function getPerPage(): int
     {
-        return $this->query('per_page', 10);
+        return $this->query('perPage', 10);
     }
 }
