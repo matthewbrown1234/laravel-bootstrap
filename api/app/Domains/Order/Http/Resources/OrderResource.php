@@ -18,11 +18,12 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->id,
-            'status' => $this->resource->status,
-            'invoiceId' => $this->resource->order_number,
-            'createdAt' => $this->resource->created_at,
-            'updatedAt' => $this->resource->updated_at,
+            'id' => $this->id,
+            'status' => $this->status,
+            'invoiceId' => $this->order_number,
+            'subTotal' => $this->whenHas($this->getSubTotal()),
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
         ];
     }
 }

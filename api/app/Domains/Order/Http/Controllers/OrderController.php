@@ -15,15 +15,22 @@ class OrderController
     public function index(SearchPaginationRequest $request)
     {
         return new OrderCollection(
-            Order::query()->paginate(
-                perPage: $request->getPerPage(),
-                page: $request->getPage(),
-            )
+            Order::query()
+                ->withSubtotal()
+                ->paginate(
+                    perPage: $request->getPerPage(),
+                    page: $request->getPage(),
+                )
         );
     }
 
-    public function show(Order $order)
+    public function show(String $orderId)
     {
-        return new OrderDetailResource($order->load(['invoices', 'orderItems']));
+        return new OrderDetailResource(
+            Order::query()
+                ->withSubtotal()
+                ->with(['invoices', 'orderItems',])
+                ->findOrFail($orderId)
+        );
     }
 }

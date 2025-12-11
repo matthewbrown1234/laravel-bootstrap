@@ -27,10 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|Order whereOrderNumber($value)
  * @method static Builder<static>|Order whereStatus($value)
  * @method static Builder<static>|Order whereUpdatedAt($value)
+ * @method static Builder<static>|Order withSubtotal()
  * @mixin \Eloquent
  */
-
-
 class Order extends Model
 {
     use HasFactory, HasUlids;
@@ -43,5 +42,15 @@ class Order extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function scopeWithSubtotal($query)
+    {
+        return $query->withSum('orderItems as sub_total', 'price');
+    }
+    public function getSubTotal(): int | null
+    {
+        // This will use the aggregated value if available, otherwise calculate
+        return $this->sub_total;
     }
 }

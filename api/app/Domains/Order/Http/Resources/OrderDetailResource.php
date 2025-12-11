@@ -19,7 +19,7 @@ class OrderDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'orderNumber' => $this->order_number,
-            'subTotal' => optional($this->orderItems)?->sum('price'),
+            'subTotal' => $this->whenNotNull($this->getSubTotal()),
             'invoices' => $this->whenLoaded('invoices', fn() => InvoiceResource::collection($this->invoices)),
             'orderItems' => $orderItems,
             'createdAt' => $this->created_at,
