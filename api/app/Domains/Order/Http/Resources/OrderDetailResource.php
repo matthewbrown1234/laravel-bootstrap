@@ -15,12 +15,15 @@ class OrderDetailResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $orderItems = $this->whenLoaded('orderItems', fn() => OrderItemResource::collection($this->orderItems));
         return [
             'id' => $this->id,
-            'order_number' => $this->order_number,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'invoices' => $this->whenLoaded('invoices', fn() => InvoiceResource::collection($this->invoices))
+            'orderNumber' => $this->order_number,
+            'subTotal' => optional($this->orderItems)?->sum('price'),
+            'invoices' => $this->whenLoaded('invoices', fn() => InvoiceResource::collection($this->invoices)),
+            'orderItems' => $orderItems,
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
         ];
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin Order
  * @extends JsonResource<Order>
  *     Resource for the Order model
  * @property Order $resource
@@ -18,6 +19,7 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
+            'status' => $this->resource->status,
             'invoiceId' => $this->resource->order_number,
             'createdAt' => $this->resource->created_at,
             'updatedAt' => $this->resource->updated_at,

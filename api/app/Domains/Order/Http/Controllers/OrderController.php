@@ -24,6 +24,6 @@ class OrderController
 
     public function show(Order $order)
     {
-        return new OrderDetailResource($order->load('invoices'));
+        return new OrderDetailResource($order->load(['invoices', 'orderItems']));
     }
 }

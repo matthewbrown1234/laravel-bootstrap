@@ -2,21 +2,20 @@
 
 namespace App\Domains\Order\Http\Resources;
 
-use App\Domains\Order\Models\Invoice;
+use App\Domains\Order\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin Invoice */
-class InvoiceResource extends JsonResource
+/** @mixin OrderItem */
+class OrderItemResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'externalId' => $this->external_id,
-            'subTotal' => $this->sub_total,
-            'total' => $this->total,
-            'status' => $this->status,
+            'name' => $this->name,
+            'price' => $this->price,
+            'extProductId' => $this->ext_product_id,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];
