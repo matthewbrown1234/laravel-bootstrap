@@ -16,6 +16,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "*",
+        "captainhook/captainhook": "^5.27",
         "dedoc/scramble": "^0.13.8",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^v3.8",
