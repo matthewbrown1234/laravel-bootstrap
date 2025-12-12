@@ -71,8 +71,9 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
-        "compile": [
-            "./vendor/bin/phpstan analyse --memory-limit=1G"
+        "pre-commit": [
+            "./vendor/bin/phpstan analyse --memory-limit=1G",
+            "php artisan test"
         ]
     },
     "extra": {
