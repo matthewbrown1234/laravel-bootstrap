@@ -36,7 +36,7 @@ class OrderService implements OrderServiceInterface
             throw new InvalidArgumentException('Invalid Product Id');
         }
 
-        return DB::transaction(function () use ($request, $products) {
+        return DB::transaction(function () use ($products) {
             $order = new Order();
             $order->status = OrderStatus::LOCKED;
             $order->order_number = Ulid::generate();

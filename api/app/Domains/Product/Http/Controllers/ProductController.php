@@ -2,11 +2,11 @@
 
 namespace App\Domains\Product\Http\Controllers;
 
+use App\Contracts\SortBy;
 use App\Domains\Product\Http\Requests\PageableProductRequest;
 use App\Domains\Product\Http\Resources\ProductCollection;
 use App\Domains\Product\Http\Resources\ProductResource;
 use App\Domains\Product\Models\Product;
-use App\Http\Requests\SortBy;
 
 class ProductController
 {

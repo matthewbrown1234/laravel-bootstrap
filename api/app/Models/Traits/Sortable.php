@@ -2,7 +2,7 @@
 
 namespace App\Models\Traits;
 
-use App\Http\Requests\SortBy;
+use App\Contracts\SortBy;
 use Illuminate\Database\Eloquent\Builder;
 
 trait Sortable

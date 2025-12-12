@@ -14,12 +14,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $order_number
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $status
+ * @property \App\Domains\Order\Models\OrderStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Order\Models\Invoice> $invoices
  * @property-read int|null $invoices_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Order\Models\OrderItem> $orderItems
  * @property-read int|null $order_items_count
- * @method static Builder<static>|Order applySortBy(?array $sortables, \App\Http\Requests\SortBy $default)
+ * @method static Builder<static>|Order applySortBy(?array $sortables, \App\Contracts\SortBy $default)
  * @method static \Database\Factories\Domains\Order\Models\OrderFactory factory($count = null, $state = [])
  * @method static Builder<static>|Order newModelQuery()
  * @method static Builder<static>|Order newQuery()
@@ -36,6 +36,11 @@ class Order extends Model
 {
     use HasFactory, HasUlids, Sortable;
 
+    protected $casts = [
+        'sub_total' => 'integer',
+        'status' => OrderStatus::class,
+    ];
+
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
@@ -50,9 +55,10 @@ class Order extends Model
     {
         return $query->withSum('orderItems as sub_total', 'price');
     }
-    public function getSubTotal(): int | null
+
+    public function getSubTotal(): int|null
     {
         // This will use the aggregated value if available, otherwise calculate
-        return $this->sub_total;
+        return $this->getAttribute('sub_total');
     }
 }

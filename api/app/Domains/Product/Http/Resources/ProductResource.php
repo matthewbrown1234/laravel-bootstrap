@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @mixin Product
- * @extends JsonResource<Product>
  * @property Product $resource
  */
 class ProductResource extends JsonResource

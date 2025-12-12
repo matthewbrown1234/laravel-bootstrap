@@ -2,13 +2,13 @@
 
 namespace App\Domains\Order\Http\Controllers;
 
+use App\Contracts\SortBy;
 use App\Domains\Order\Contracts\OrderServiceInterface;
 use App\Domains\Order\Http\Requests\CreateOrderRequest;
 use App\Domains\Order\Http\Requests\PageableOrderRequest;
 use App\Domains\Order\Http\Resources\OrderCollection;
 use App\Domains\Order\Http\Resources\OrderDetailResource;
 use App\Domains\Order\Models\Order;
-use App\Http\Requests\SortBy;
 
 class OrderController
 {

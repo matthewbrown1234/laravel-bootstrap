@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Contracts\SortBy;
 use App\Rules\SortByParam;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,7 +17,7 @@ abstract class SortablePaginationRequest extends FormRequest
     {
         return [
             'page' => ['nullable', 'integer', 'min:1'],
-            'perPage' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'perPage' => ['nullable', 'integer', 'min:1', 'max:500'],
             self::SORT_BY_PARAM => ['nullable', 'string', new SortByParam($this->sortableColumns())],
         ];
     }
@@ -38,7 +39,6 @@ abstract class SortablePaginationRequest extends FormRequest
     {
         if (!$this->has(SortablePaginationRequest::SORT_BY_PARAM)) return null;
         $rawSortByList = explode(',', trim($this->get(SortablePaginationRequest::SORT_BY_PARAM)));
-        if (empty($rawSortByList)) return null;
         /** @var array<SortBy> */
         return array_reduce($rawSortByList, function ($acc, $item) {
             $sortPair = explode(':', trim($item));
