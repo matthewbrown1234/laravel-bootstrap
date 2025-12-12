@@ -2,6 +2,7 @@
 
 namespace App\Domains\Order\Models;
 
+use App\Models\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $invoices_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Order\Models\OrderItem> $orderItems
  * @property-read int|null $order_items_count
+ * @method static Builder<static>|Order applySortBy(?array $sortables)
  * @method static \Database\Factories\Domains\Order\Models\OrderFactory factory($count = null, $state = [])
  * @method static Builder<static>|Order newModelQuery()
  * @method static Builder<static>|Order newQuery()
@@ -32,7 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Order extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasUlids, Sortable;
 
     public function invoices(): HasMany
     {

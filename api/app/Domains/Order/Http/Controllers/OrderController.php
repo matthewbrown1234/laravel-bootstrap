@@ -4,10 +4,10 @@ namespace App\Domains\Order\Http\Controllers;
 
 use App\Domains\Order\Contracts\OrderServiceInterface;
 use App\Domains\Order\Http\Requests\CreateOrderRequest;
+use App\Domains\Order\Http\Requests\PageableOrderRequest;
 use App\Domains\Order\Http\Resources\OrderCollection;
 use App\Domains\Order\Http\Resources\OrderDetailResource;
 use App\Domains\Order\Models\Order;
-use App\Http\Requests\SearchPaginationRequest;
 
 class OrderController
 {
@@ -18,12 +18,12 @@ class OrderController
     /**
      * Display a listing of the resource.
      */
-    public function index(SearchPaginationRequest $request)
+    public function index(PageableOrderRequest $request)
     {
         return new OrderCollection(
             Order::query()
+                ->applySortBy($request->getSortBy())
                 ->withSubtotal()
-                ->orderBy('created_at', 'desc')
                 ->paginate(
                     perPage: $request->getPerPage(),
                     page: $request->getPage(),
