@@ -1,0 +1,13 @@
+# .pre-commit-config.yaml
+repos:
+  # --- 1. PHP/API Hooks (e.g., PHPStan) ---
+  - repo: local
+    hooks:
+      - id: phpstan
+        name: PHPStan Check (API Dir Only)
+        # This is the command that pre-commit will run
+        entry: ./api/composer compile
+        language: system # Use system because PHPStan is already installed via Composer
+        # key step: only run if changes are in the API directory
+        exclude: '^(UI)/'
+        pass_filenames: false # PHPStan runs on the whole project/target
