@@ -1,9 +1,8 @@
 # .pre-commit-config.yaml
 repos:
-  # --- 1. PHP/API Hooks (e.g., PHPStan) ---
   - repo: local
     hooks:
-      - id: phpstan
+      - id: api-hooks
         name: PHPStan Check (API Dir Only)
         # This is the command that pre-commit will run
         entry: composer pre-commit -d api
