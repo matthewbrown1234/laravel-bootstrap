@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
+ * @property int $name
  * @property string|null $description
  * @property int $price
  * @property Carbon|null $created_at
