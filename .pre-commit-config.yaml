@@ -8,6 +8,7 @@ repos:
         # This is the command that pre-commit will run
         entry: ./api/composer compile
         language: system # Use system because PHPStan is already installed via Composer
+        files: '\.php$' # Check files ending in .php
         # key step: only run if changes are in the API directory
         exclude: '^(UI)/'
         pass_filenames: false # PHPStan runs on the whole project/target
