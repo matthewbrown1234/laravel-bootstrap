@@ -6,7 +6,7 @@ repos:
       - id: phpstan
         name: PHPStan Check (API Dir Only)
         # This is the command that pre-commit will run
-        entry: ./api/composer compile
+        entry: composer compile -d api
         language: system # Use system because PHPStan is already installed via Composer
         files: '\.php$' # Check files ending in .php
         # key step: only run if changes are in the API directory
