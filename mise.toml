@@ -1,0 +1,17 @@
+# mise.toml (in monorepo root)
+
+[tools]
+
+
+[hooks]
+# The 'enter' hook runs every time a user changes directory into the project
+# (after the initial trust). We use it to ensure the Git hook is linked.
+enter = '''
+if [ ! -f .git/hooks/pre-commit ]; then
+    echo "Installing Git pre-commit hooks..."
+    # This command creates the pre-commit wrapper script in .git/hooks/
+    pre-commit install
+else
+    echo "Git pre-commit hooks already installed."
+fi
+'''
