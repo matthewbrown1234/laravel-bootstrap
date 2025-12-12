@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $invoices_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Order\Models\OrderItem> $orderItems
  * @property-read int|null $order_items_count
- * @method static Builder<static>|Order applySortBy(?array $sortables)
+ * @method static Builder<static>|Order applySortBy(?array $sortables, \App\Http\Requests\SortBy $default)
  * @method static \Database\Factories\Domains\Order\Models\OrderFactory factory($count = null, $state = [])
  * @method static Builder<static>|Order newModelQuery()
  * @method static Builder<static>|Order newQuery()

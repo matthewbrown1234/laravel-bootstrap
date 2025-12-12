@@ -6,6 +6,7 @@ use App\Domains\Product\Http\Requests\PageableProductRequest;
 use App\Domains\Product\Http\Resources\ProductCollection;
 use App\Domains\Product\Http\Resources\ProductResource;
 use App\Domains\Product\Models\Product;
+use App\Http\Requests\SortBy;
 
 class ProductController
 {
@@ -16,7 +17,7 @@ class ProductController
     {
         return new ProductCollection(
             Product::query()
-                ->applySortBy($request->getSortBy())
+                ->applySortBy($request->getSortBy(), new SortBy(col: 'created_at', dir: 'desc'))
                 ->paginate(
                     perPage: $request->getPerPage(),
                     page: $request->getPage(),

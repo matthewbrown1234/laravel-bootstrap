@@ -13,6 +13,7 @@ class PageableProductRequest extends SortablePaginationRequest
     {
         return [
             'name',
+            'price',
             'created_at'
         ];
     }

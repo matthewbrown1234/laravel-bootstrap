@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int $price
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @method static Builder<static>|Product applySortBy(?array $sortables)
+ * @method static Builder<static>|Product applySortBy(?array $sortables, \App\Http\Requests\SortBy $default)
  * @method static \Database\Factories\Domains\Product\Models\ProductFactory factory($count = null, $state = [])
  * @method static Builder<static>|Product newModelQuery()
  * @method static Builder<static>|Product newQuery()
@@ -32,9 +32,4 @@ use Illuminate\Support\Carbon;
 class Product extends Model
 {
     use HasFactory, HasUlids, Sortable;
-
-    public function priceToFloat(): float
-    {
-        return $this->price / 100;
-    }
 }

@@ -8,6 +8,7 @@ use App\Domains\Order\Http\Requests\PageableOrderRequest;
 use App\Domains\Order\Http\Resources\OrderCollection;
 use App\Domains\Order\Http\Resources\OrderDetailResource;
 use App\Domains\Order\Models\Order;
+use App\Http\Requests\SortBy;
 
 class OrderController
 {
@@ -22,7 +23,7 @@ class OrderController
     {
         return new OrderCollection(
             Order::query()
-                ->applySortBy($request->getSortBy())
+                ->applySortBy($request->getSortBy(), new SortBy(col: 'created_at', dir: 'desc'))
                 ->withSubtotal()
                 ->paginate(
                     perPage: $request->getPerPage(),
