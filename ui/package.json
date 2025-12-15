@@ -9,8 +9,10 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "generate": "bunx @hey-api/openapi-ts -f ./generate-client.json",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "postinstall": "bun run generate",
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
@@ -20,6 +22,7 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@pinia/colada": "^0.18.1",
     "@primevue/themes": "^4.5.3",
     "@tailwindcss/vite": "^4.1.18",
     "pinia": "^3.0.4",
@@ -31,6 +34,7 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.89.0",
     "@primevue/auto-import-resolver": "^4.5.3",
     "@tsconfig/node24": "^24.0.3",
     "@types/jsdom": "^27.0.0",

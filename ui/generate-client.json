@@ -1,0 +1,10 @@
+{
+  "input": "http://localhost:8000/docs/api/openapi.json",
+  "output": "src/client",
+  "plugins": [
+    {
+      "name": "@pinia/colada",
+      "queryOptions": true
+    }
+  ]
+}

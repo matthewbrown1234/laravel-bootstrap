@@ -36,3 +36,5 @@ coverage
 __screenshots__/
 
 components.d.ts
+
+src/client/**/*.*

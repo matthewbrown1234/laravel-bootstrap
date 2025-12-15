@@ -1,7 +1,19 @@
 <script setup lang="ts">
 import Product from '@/components/Product.vue'
+import { useQuery } from '@pinia/colada'
+import { productsIndexQuery } from '@/client/@pinia/colada.gen'
+import ProductSkeleton from '@/components/ProductSkeleton.vue'
 
-const products = Array(50).fill({ id: 0 })
+const abortController = new AbortController()
+
+const { data, error, isLoading, state } = useQuery(
+  productsIndexQuery({
+    signal: abortController.signal,
+    query: {
+      perPage: 10,
+    },
+  }),
+)
 </script>
 
 <template>
@@ -10,7 +22,11 @@ const products = Array(50).fill({ id: 0 })
     <div
       class="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5"
     >
-      <template v-for="product in products" :key="index">
+      <template v-if="isLoading"><ProgressSpinner /></template>
+      <template v-if="isLoading">
+        <ProductSkeleton />
+      </template>
+      <template v-else-if="!isLoading" v-for="product in data?.data" :key="index">
         <Product :product="product" />
       </template>
     </div>

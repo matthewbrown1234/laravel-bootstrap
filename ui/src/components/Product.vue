@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import type { ProductResource } from '@/client'
+
 export type ProductProps = {
-  product: any
+  product: ProductResource
 }
 
-const props = defineProps<ProductProps>()
+defineProps<ProductProps>()
 </script>
 
 <template>
-  <Card title="Product Name">
+  <Card :title="product.name">
     <template #content>
       <div>
         <Image alt="Image">
@@ -20,8 +22,8 @@ const props = defineProps<ProductProps>()
           </template>
         </Image>
       </div>
-      <h3>Product Name</h3>
-      <div class="font-bold">$11.99</div>
+      <h3>{{ product.name }}</h3>
+      <div class="font-bold">{{ product.price }}</div>
     </template>
     <template #footer>
       <Button rounded variant="outlined" icon="pi pi-plus" label="Add to Cart" />
