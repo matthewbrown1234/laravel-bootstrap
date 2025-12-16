@@ -3,8 +3,10 @@
   "output": "src/client",
   "plugins": [
     {
-      "name": "@pinia/colada",
-      "queryOptions": true
+      "name": "@tanstack/vue-query",
+      "queryOptions": true,
+      "infiniteQueryOptions": true,
+      "mutationOptions": true
     }
   ]
 }

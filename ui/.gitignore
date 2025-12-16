@@ -38,3 +38,9 @@ __screenshots__/
 components.d.ts
 
 src/client/**/*.*
+
+.env
+.env.*
+
+!.env.example
+!.env.*.example

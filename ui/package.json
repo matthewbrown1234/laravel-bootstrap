@@ -7,7 +7,7 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "bun --bun vite --mode=development",
     "build": "run-p type-check \"build-only {@}\" --",
     "generate": "bunx @hey-api/openapi-ts -f ./generate-client.json",
     "preview": "vite preview",
@@ -16,15 +16,16 @@
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "build-only": "vite build",
+    "build-only": "bun --bun vite build --mode=production",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
-    "@pinia/colada": "^0.18.1",
     "@primevue/themes": "^4.5.3",
     "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/vue-query": "^5.92.1",
+    "@vueuse/core": "^14.1.0",
     "pinia": "^3.0.4",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.3",
