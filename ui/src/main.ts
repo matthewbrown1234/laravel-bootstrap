@@ -3,6 +3,13 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createPinia } from 'pinia'
+import { client } from './client/client.gen' // Import the generated client
+
+client.setConfig({
+  headers: {
+    Accept: 'application/json',
+  },
+})
 
 import PrimeVue from 'primevue/config'
 import Mui from '@primeuix/themes/material'

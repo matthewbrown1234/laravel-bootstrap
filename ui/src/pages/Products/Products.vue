@@ -11,7 +11,6 @@ const abortController = new AbortController()
 const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
   {
     ...productsIndexInfiniteOptions({
-      baseUrl: window.location.href + 'api',
       signal: abortController.signal,
       query: {
         perPage: 500,

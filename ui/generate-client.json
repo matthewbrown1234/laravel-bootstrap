@@ -3,6 +3,10 @@
   "output": "src/client",
   "plugins": [
     {
+      "baseUrl": false,
+      "name": "@hey-api/client-fetch"
+    },
+    {
       "name": "@tanstack/vue-query",
       "queryOptions": true,
       "infiniteQueryOptions": true,
