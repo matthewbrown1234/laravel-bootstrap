@@ -4,16 +4,11 @@ namespace App\Domains\Product\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 
+/**
+ * @inheritDoc
+ */
 class SearchProductsRequest extends PageableProductRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,6 +17,7 @@ class SearchProductsRequest extends PageableProductRequest
     public function rules(): array
     {
         return [
+            ...parent::rules(),
             "ids" => "nullable|array",
             "ids.*" => "string|ulid"
         ];

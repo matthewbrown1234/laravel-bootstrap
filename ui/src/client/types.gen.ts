@@ -99,6 +99,9 @@ export type ProductResource = {
  * SearchProductsRequest
  */
 export type SearchProductsRequest = {
+    page?: number | null;
+    perPage?: number | null;
+    sortBy?: string | null;
     ids?: Array<string> | null;
 };
 

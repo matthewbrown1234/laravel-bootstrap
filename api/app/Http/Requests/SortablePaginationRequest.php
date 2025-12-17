@@ -16,7 +16,7 @@ abstract class SortablePaginationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => ['nullable', 'integer', 'min:1'],
+            'page' => ['nullable', 'integer'],
             'perPage' => ['nullable', 'integer', 'min:1', 'max:500'],
             self::SORT_BY_PARAM => ['nullable', 'string', new SortByParam($this->sortableColumns())],
         ];
@@ -24,12 +24,14 @@ abstract class SortablePaginationRequest extends FormRequest
 
     public function getPage(): int
     {
-        return $this->query('page', 1);
+        $validated = $this->validated();
+        return $validated['page'] ?? 1;
     }
 
     public function getPerPage(): int
     {
-        return $this->query('perPage', 10);
+        $validated = $this->validated();
+        return $validated['perPage'] ?? 10;
     }
 
     /**
@@ -38,7 +40,8 @@ abstract class SortablePaginationRequest extends FormRequest
     public function getSortBy(): array|null
     {
         if (!$this->has(SortablePaginationRequest::SORT_BY_PARAM)) return null;
-        $rawSortByList = explode(',', trim($this->get(SortablePaginationRequest::SORT_BY_PARAM)));
+        $validated = $this->validated();
+        $rawSortByList = explode(',', trim($validated[SortablePaginationRequest::SORT_BY_PARAM]));
         /** @var array<SortBy> */
         return array_reduce($rawSortByList, function ($acc, $item) {
             $sortPair = explode(':', trim($item));
