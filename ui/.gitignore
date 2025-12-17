@@ -35,10 +35,6 @@ coverage
 # Vitest
 __screenshots__/
 
-components.d.ts
-
-src/client/**/*.*
-
 .env
 .env.*
 
