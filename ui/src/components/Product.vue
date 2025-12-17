@@ -5,7 +5,12 @@ export type ProductProps = {
   product: ProductResource
 }
 
+export type ProductEmits = {
+  (e: 'addToCart', args: { product: ProductResource }): void
+}
+
 defineProps<ProductProps>()
+const emits = defineEmits<ProductEmits>()
 </script>
 
 <template>
@@ -26,7 +31,13 @@ defineProps<ProductProps>()
       <div class="font-bold">{{ product.price }}</div>
     </template>
     <template #footer>
-      <Button rounded variant="outlined" icon="pi pi-plus" label="Add to Cart" />
+      <Button
+        @click="() => emits('addToCart', { product })"
+        rounded
+        variant="outlined"
+        icon="pi pi-plus"
+        label="Add to Cart"
+      />
     </template>
   </Card>
 </template>

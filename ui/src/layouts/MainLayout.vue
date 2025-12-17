@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import useShoppingCart from '@/stores/useShoppingCart.ts'
 
 const brand = ref(`Matt's Products`)
-const cartSize = ref(3)
+const store = useShoppingCart()
 </script>
 
 <template>
@@ -23,7 +24,7 @@ const cartSize = ref(3)
 
       <template #end>
         <Button icon="pi pi-user" aria-label="User" variant="text" />
-        <OverlayBadge :value="cartSize" severity="info" class="mr-2">
+        <OverlayBadge :value="store.count" severity="info" class="mr-2">
           <Button icon="pi pi-shopping-cart" aria-label="Shopping Cart" variant="text" />
         </OverlayBadge>
       </template>

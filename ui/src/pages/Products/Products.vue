@@ -5,13 +5,11 @@ import { useInfiniteScroll } from '@vueuse/core'
 import { useInfiniteQuery } from '@tanstack/vue-query'
 import { productsIndexInfiniteOptions } from '@/client/@tanstack/vue-query.gen.ts'
 import { computed } from 'vue'
-
-const abortController = new AbortController()
+import useShoppingCart from '@/stores/useShoppingCart.ts'
 
 const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
   {
     ...productsIndexInfiniteOptions({
-      signal: abortController.signal,
       query: {
         perPage: 500,
       },
@@ -30,7 +28,7 @@ const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage }
 // Flatten all pages into a single product array
 const allProducts = computed(() => data.value?.pages.flatMap((page) => page.data))
 
-const { reset } = useInfiniteScroll(
+useInfiniteScroll(
   window,
   () => {
     if (hasNextPage.value && !isFetchingNextPage.value) {
@@ -44,6 +42,8 @@ const { reset } = useInfiniteScroll(
     },
   },
 )
+
+const cart = useShoppingCart()
 </script>
 
 <template>
@@ -60,7 +60,7 @@ const { reset } = useInfiniteScroll(
           class="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5"
         >
           <div v-for="product in allProducts" :key="product.id">
-            <Product :product="product" />
+            <Product @add-to-cart="cart.add" :product="product" />
           </div>
         </div>
       </template>
