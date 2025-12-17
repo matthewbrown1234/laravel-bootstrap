@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { OrdersIndexData, OrdersIndexErrors, OrdersIndexResponses, OrdersShowData, OrdersShowResponses, OrdersStoreData, OrdersStoreErrors, OrdersStoreResponses, ProductsIndexData, ProductsIndexErrors, ProductsIndexResponses, ProductsShowData, ProductsShowErrors, ProductsShowResponses } from './types.gen';
+import type { OrdersIndexData, OrdersIndexErrors, OrdersIndexResponses, OrdersShowData, OrdersShowResponses, OrdersStoreData, OrdersStoreErrors, OrdersStoreResponses, ProductSearchData, ProductSearchErrors, ProductSearchResponses, ProductsIndexData, ProductsIndexErrors, ProductsIndexResponses, ProductsShowData, ProductsShowErrors, ProductsShowResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -33,6 +33,15 @@ export const ordersStore = <ThrowOnError extends boolean = false>(options: Optio
 });
 
 export const ordersShow = <ThrowOnError extends boolean = false>(options: Options<OrdersShowData, ThrowOnError>) => (options.client ?? client).get<OrdersShowResponses, unknown, ThrowOnError>({ url: '/api/orders/{orderId}', ...options });
+
+export const productSearch = <ThrowOnError extends boolean = false>(options?: Options<ProductSearchData, ThrowOnError>) => (options?.client ?? client).post<ProductSearchResponses, ProductSearchErrors, ThrowOnError>({
+    url: '/api/products:search',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers
+    }
+});
 
 /**
  * Display a listing of the resource

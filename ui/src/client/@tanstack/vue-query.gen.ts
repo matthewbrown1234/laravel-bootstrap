@@ -3,8 +3,8 @@
 import { type DefaultError, type InfiniteData, infiniteQueryOptions, queryOptions, type UseMutationOptions } from '@tanstack/vue-query';
 
 import { client } from '../client.gen';
-import { type Options, ordersIndex, ordersShow, ordersStore, productsIndex, productsShow } from '../sdk.gen';
-import type { OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
+import { type Options, ordersIndex, ordersShow, ordersStore, productSearch, productsIndex, productsShow } from '../sdk.gen';
+import type { OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductSearchData, ProductSearchError, ProductSearchResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'baseUrl' | 'body' | 'headers' | 'path' | 'query'> & {
@@ -141,6 +141,20 @@ export const ordersShowOptions = (options: Options<OrdersShowData>) => queryOpti
     },
     queryKey: ordersShowQueryKey(options)
 });
+
+export const productSearchMutation = (options?: Partial<Options<ProductSearchData>>): UseMutationOptions<ProductSearchResponse, ProductSearchError, Options<ProductSearchData>> => {
+    const mutationOptions: UseMutationOptions<ProductSearchResponse, ProductSearchError, Options<ProductSearchData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await productSearch({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
 
 export const productsIndexQueryKey = (options?: Options<ProductsIndexData>) => createQueryKey('productsIndex', options);
 

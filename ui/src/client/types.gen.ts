@@ -95,6 +95,13 @@ export type ProductResource = {
     updatedAt: string | null;
 };
 
+/**
+ * SearchProductsRequest
+ */
+export type SearchProductsRequest = {
+    ids?: Array<string> | null;
+};
+
 export type OrdersIndexData = {
     body?: never;
     path?: never;
@@ -229,6 +236,79 @@ export type OrdersShowResponses = {
 };
 
 export type OrdersShowResponse = OrdersShowResponses[keyof OrdersShowResponses];
+
+export type ProductSearchData = {
+    body?: SearchProductsRequest;
+    path?: never;
+    query?: never;
+    url: '/api/products:search';
+};
+
+export type ProductSearchErrors = {
+    /**
+     * Validation error
+     */
+    422: {
+        /**
+         * Errors overview.
+         */
+        message: string;
+        /**
+         * A detailed description of each field that failed validation.
+         */
+        errors: {
+            [key: string]: Array<string>;
+        };
+    };
+};
+
+export type ProductSearchError = ProductSearchErrors[keyof ProductSearchErrors];
+
+export type ProductSearchResponses = {
+    /**
+     * Paginated set of `ProductResource`
+     */
+    200: {
+        data: ProductCollection;
+        links: {
+            first: string | null;
+            last: string | null;
+            prev: string | null;
+            next: string | null;
+        };
+        meta: {
+            current_page: number;
+            from: number | null;
+            last_page: number;
+            /**
+             * Generated paginator links.
+             */
+            links: Array<{
+                url: string | null;
+                label: string;
+                active: boolean;
+            }>;
+            /**
+             * Base path for paginator generated URLs.
+             */
+            path: string | null;
+            /**
+             * Number of items shown per page.
+             */
+            per_page: number;
+            /**
+             * Number of the last item in the slice.
+             */
+            to: number | null;
+            /**
+             * Total number of items being paginated.
+             */
+            total: number;
+        };
+    };
+};
+
+export type ProductSearchResponse = ProductSearchResponses[keyof ProductSearchResponses];
 
 export type ProductsIndexData = {
     body?: never;
