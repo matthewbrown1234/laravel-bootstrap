@@ -10,4 +10,9 @@ repos:
         files: '\.php$' # Check files ending in .php
         # key step: only run if changes are in the API directory
         exclude: '^(UI)/'
-        pass_filenames: false # PHPStan runs on the whole project/target
+      - id: ui-hooks
+        name: Prettier Check (UI Dir Only)
+        entry: bun run lint && bun run format && bun run type-check
+        language: system
+        files: '\.tsx?$'
+        exclude: '^(API)/'
