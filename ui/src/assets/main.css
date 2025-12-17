@@ -1,12 +1,12 @@
-@import "tailwindcss";
-@import "tailwindcss-primeui";
-@import "primeicons/primeicons.css";
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+@import 'primeicons/primeicons.css';
 
 html {
   /*box-sizing: border-box;*/
   /*-webkit-font-smoothing: antialiased;*/
   /*-moz-osx-font-smoothing: grayscale;*/
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   /*font-optical-sizing: auto;*/
   /*font-variation-settings: normal;*/
 }

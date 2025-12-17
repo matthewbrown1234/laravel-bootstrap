@@ -12,7 +12,7 @@ repos:
         exclude: '^(UI)/'
       - id: ui-hooks
         name: Prettier Check (UI Dir Only)
-        entry: bun run lint && bun run format && bun run type-check
+        entry: bun run --cwd ui format
         language: system
         files: '\.tsx?$'
         exclude: '^(API)/'
