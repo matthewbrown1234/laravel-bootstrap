@@ -7,8 +7,8 @@ import { productsIndexInfiniteOptions } from '@/client/@tanstack/vue-query.gen.t
 import { computed } from 'vue'
 import useShoppingCart from '@/stores/useShoppingCart.ts'
 
-const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-  {
+const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage, isPending } =
+  useInfiniteQuery({
     ...productsIndexInfiniteOptions({
       query: {
         perPage: 500,
@@ -22,8 +22,7 @@ const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage }
       return undefined
     },
     initialPageParam: 1,
-  },
-)
+  })
 
 // Flatten all pages into a single product array
 const allProducts = computed(() => data.value?.pages.flatMap((page) => page.data))
@@ -52,10 +51,10 @@ const cart = useShoppingCart()
     <div>
       <template v-if="error">An error occurred: {{ error?.message }}</template>
       <template v-if="isFetchingNextPage"><ProgressSpinner /></template>
-      <template v-show="isLoading">
+      <template v-show="isPending">
         <ProductSkeleton />
       </template>
-      <template v-if="!isLoading">
+      <template v-if="!isPending">
         <div
           class="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5"
         >

@@ -5,17 +5,17 @@ import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createPinia } from 'pinia'
 import { client } from './client/client.gen' // Import the generated client
 
-client.setConfig({
-  headers: {
-    Accept: 'application/json',
-  },
-})
-
 import PrimeVue from 'primevue/config'
 import Mui from '@primeuix/themes/material'
 
 import App from './App.vue'
 import router from './router'
+
+client.setConfig({
+  headers: {
+    Accept: 'application/json',
+  },
+})
 
 const app = createApp(App)
 app.use(VueQueryPlugin)

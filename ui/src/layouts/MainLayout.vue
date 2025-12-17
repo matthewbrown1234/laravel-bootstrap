@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import useShoppingCart from '@/stores/useShoppingCart.ts'
+import ShoppingCartDrawer from '@/components/ShoppingCartDrawer.vue'
 
 const brand = ref(`Matt's Products`)
 const store = useShoppingCart()
+
+const visible = ref(false)
 </script>
 
 <template>
@@ -25,7 +28,16 @@ const store = useShoppingCart()
       <template #end>
         <Button icon="pi pi-user" aria-label="User" variant="text" />
         <OverlayBadge :value="store.count" severity="info" class="mr-2">
-          <Button icon="pi pi-shopping-cart" aria-label="Shopping Cart" variant="text" />
+          <Button
+            @click="
+              () => {
+                visible = true
+              }
+            "
+            icon="pi pi-shopping-cart"
+            aria-label="Shopping Cart"
+            variant="text"
+          />
         </OverlayBadge>
       </template>
     </Toolbar>
@@ -33,6 +45,7 @@ const store = useShoppingCart()
   <main class="px-6">
     <slot />
   </main>
+  <ShoppingCartDrawer v-model:visible="visible" />
 </template>
 
 <style scoped></style>
