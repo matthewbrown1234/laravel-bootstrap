@@ -14,12 +14,14 @@ const { mutate, data, error, isPending } = useMutation({
 })
 
 watch([visible, shoppingCart], () => {
-  visible.value &&
-    mutate({
-      body: {
-        ids: shoppingCart.items.map((i) => i.id),
-      },
-    })
+  if (!visible.value) {
+    return
+  }
+  mutate({
+    body: {
+      ids: shoppingCart.items.map((i) => i.id),
+    },
+  })
 })
 
 const cartProducts = computed(() =>

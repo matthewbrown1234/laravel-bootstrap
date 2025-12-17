@@ -12,7 +12,6 @@ repos:
         exclude: '^(UI)/'
       - id: ui-hooks
         name: Prettier Check (UI Dir Only)
-        entry: bun run --cwd ui format
+        entry: bash -c "cd ui && bun run precommit"
         language: system
-        files: '\.tsx?$'
         exclude: '^(API)/'

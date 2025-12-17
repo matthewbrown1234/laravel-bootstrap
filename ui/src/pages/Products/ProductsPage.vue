@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Product from '@/components/Product.vue'
+import ProductCard from '@/components/ProductCard.vue'
 import ProductSkeleton from '@/components/ProductSkeleton.vue'
 import { useInfiniteScroll } from '@vueuse/core'
 import { useInfiniteQuery } from '@tanstack/vue-query'
@@ -7,8 +7,8 @@ import { productsIndexInfiniteOptions } from '@/client/@tanstack/vue-query.gen.t
 import { computed } from 'vue'
 import useShoppingCart from '@/stores/useShoppingCart.ts'
 
-const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage, isPending } =
-  useInfiniteQuery({
+const { data, error, hasNextPage, fetchNextPage, isFetchingNextPage, isPending } = useInfiniteQuery(
+  {
     ...productsIndexInfiniteOptions({
       query: {
         perPage: 500,
@@ -22,7 +22,8 @@ const { data, error, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage, 
       return undefined
     },
     initialPageParam: 1,
-  })
+  },
+)
 
 // Flatten all pages into a single product array
 const allProducts = computed(() => data.value?.pages.flatMap((page) => page.data))
@@ -36,7 +37,7 @@ useInfiniteScroll(
   },
   {
     distance: 100,
-    canLoadMore: (_) => {
+    canLoadMore: () => {
       return true
     },
   },
@@ -51,7 +52,7 @@ const cart = useShoppingCart()
     <div>
       <template v-if="error">An error occurred: {{ error?.message }}</template>
       <template v-if="isFetchingNextPage"><ProgressSpinner /></template>
-      <template v-show="isPending">
+      <template v-if="isPending">
         <ProductSkeleton />
       </template>
       <template v-if="!isPending">
@@ -59,7 +60,7 @@ const cart = useShoppingCart()
           class="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5"
         >
           <div v-for="product in allProducts" :key="product.id">
-            <Product @add-to-cart="cart.add" :product="product" />
+            <ProductCard @add-to-cart="cart.add" :product="product" />
           </div>
         </div>
       </template>

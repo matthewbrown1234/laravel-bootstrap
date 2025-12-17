@@ -1,3 +1,3 @@
-import Products from './Products.vue'
+import ProductsPage from './ProductsPage.vue'
 
-export default Products
+export default ProductsPage

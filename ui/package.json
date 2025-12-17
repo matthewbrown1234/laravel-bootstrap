@@ -19,7 +19,8 @@
     "build-only": "bun --bun vite build --mode=production",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "format": "prettier --write --experimental-cli src/",
+    "precommit": "bun run format && bun run lint && bun run type-check"
   },
   "dependencies": {
     "@primevue/themes": "^4.5.3",
