@@ -5,6 +5,13 @@ export type ClientOptions = {
 };
 
 /**
+ * CancelOrderRequest
+ */
+export type CancelOrderRequest = {
+    orderId: string;
+};
+
+/**
  * CreateOrderRequest
  */
 export type CreateOrderRequest = {
@@ -43,6 +50,7 @@ export type OrderDetailResource = {
     id: string;
     orderNumber: string;
     subTotal?: number;
+    formattedSubTotal?: string;
     invoices?: Array<InvoiceResource>;
     orderItems?: Array<OrderItemResource>;
     createdAt: string | null;
@@ -56,6 +64,7 @@ export type OrderItemResource = {
     id: string;
     name: string;
     price: number;
+    formattedPrice: string;
     extProductId: string;
     createdAt: string | null;
     updatedAt: string | null;
@@ -91,6 +100,7 @@ export type ProductResource = {
     name: string;
     description: string | null;
     price: number;
+    formattedPrice: string;
     createdAt: string | null;
     updatedAt: string | null;
 };
@@ -239,6 +249,82 @@ export type OrdersShowResponses = {
 };
 
 export type OrdersShowResponse = OrdersShowResponses[keyof OrdersShowResponses];
+
+export type OrderCreateData = {
+    body: CreateOrderRequest;
+    path?: never;
+    query?: never;
+    url: '/api/orders:create';
+};
+
+export type OrderCreateErrors = {
+    /**
+     * Validation error
+     */
+    422: {
+        /**
+         * Errors overview.
+         */
+        message: string;
+        /**
+         * A detailed description of each field that failed validation.
+         */
+        errors: {
+            [key: string]: Array<string>;
+        };
+    };
+};
+
+export type OrderCreateError = OrderCreateErrors[keyof OrderCreateErrors];
+
+export type OrderCreateResponses = {
+    /**
+     * `OrderDetailResource`
+     */
+    200: {
+        data: OrderDetailResource;
+    };
+};
+
+export type OrderCreateResponse = OrderCreateResponses[keyof OrderCreateResponses];
+
+export type OrderCancelData = {
+    body: CancelOrderRequest;
+    path?: never;
+    query?: never;
+    url: '/api/orders:cancel';
+};
+
+export type OrderCancelErrors = {
+    /**
+     * Validation error
+     */
+    422: {
+        /**
+         * Errors overview.
+         */
+        message: string;
+        /**
+         * A detailed description of each field that failed validation.
+         */
+        errors: {
+            [key: string]: Array<string>;
+        };
+    };
+};
+
+export type OrderCancelError = OrderCancelErrors[keyof OrderCancelErrors];
+
+export type OrderCancelResponses = {
+    /**
+     * `OrderDetailResource`
+     */
+    200: {
+        data: OrderDetailResource;
+    };
+};
+
+export type OrderCancelResponse = OrderCancelResponses[keyof OrderCancelResponses];
 
 export type ProductSearchData = {
     body?: SearchProductsRequest;

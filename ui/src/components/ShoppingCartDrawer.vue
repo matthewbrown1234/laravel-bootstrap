@@ -4,6 +4,7 @@ import useShoppingCart from '@/stores/useShoppingCart.ts'
 import { productSearchMutation } from '@/client/@tanstack/vue-query.gen.ts'
 import { useMutation } from '@tanstack/vue-query'
 import type { ProductResource } from '@/client'
+import { useRouter } from 'vue-router'
 
 const visible = defineModel<boolean>('visible', { default: false })
 const shoppingCart = useShoppingCart()
@@ -23,6 +24,7 @@ watch([visible, shoppingCart], () => {
     },
   })
 })
+const router = useRouter()
 
 const cartProducts = computed(() =>
   shoppingCart.items.reduce((acc: Array<ProductResource & { quantity: number }>, cur) => {
@@ -39,6 +41,12 @@ const cartProducts = computed(() =>
     return acc
   }, []),
 )
+const onCheckout = () => {
+  router.push({
+    name: 'checkout',
+  })
+  visible.value = false
+}
 </script>
 
 <template>
@@ -61,18 +69,18 @@ const cartProducts = computed(() =>
     <template v-if="!error && !isPending && !cartProducts.length">
       <div class="flex justify-center">Your cart is empty</div>
     </template>
-    <template v-if="!isPending">
+    <template v-if="!isPending && cartProducts.length">
       <div class="flex flex-col h-full justify-between">
         <div class="flex flex-col gap-2 overflow-y-auto">
           <Card v-for="(product, index) in cartProducts" :key="product.id">
             <template #content>
               <div class="flex justify-between items-center">
                 <div class="w-1/2">
-                  <span class="font-bold">{{ product.name }}</span>
+                  <span class="font-bold capitalize">{{ product.name }}</span>
                 </div>
                 <div class="w-1/2 flex justify-end items-center gap-2">
                   <span class="font-bold">
-                    {{ product.price }}
+                    {{ product.formattedPrice }}
                   </span>
                   <span>
                     {{ product.quantity }}
@@ -98,7 +106,7 @@ const cartProducts = computed(() =>
             }}</span>
           </div>
           <div class="mt-4">
-            <Button size="large" class="w-full" label="Checkout" />
+            <Button @click="onCheckout" size="large" class="w-full" label="Checkout" />
           </div>
         </div>
       </div>

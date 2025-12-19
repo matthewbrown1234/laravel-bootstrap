@@ -3,8 +3,8 @@
 import { type DefaultError, type InfiniteData, infiniteQueryOptions, queryOptions, type UseMutationOptions } from '@tanstack/vue-query';
 
 import { client } from '../client.gen';
-import { type Options, ordersIndex, ordersShow, ordersStore, productSearch, productsIndex, productsShow } from '../sdk.gen';
-import type { OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductSearchData, ProductSearchError, ProductSearchResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
+import { type Options, orderCancel, orderCreate, ordersIndex, ordersShow, ordersStore, productSearch, productsIndex, productsShow } from '../sdk.gen';
+import type { OrderCancelData, OrderCancelError, OrderCancelResponse, OrderCreateData, OrderCreateError, OrderCreateResponse, OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductSearchData, ProductSearchError, ProductSearchResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'baseUrl' | 'body' | 'headers' | 'path' | 'query'> & {
@@ -141,6 +141,34 @@ export const ordersShowOptions = (options: Options<OrdersShowData>) => queryOpti
     },
     queryKey: ordersShowQueryKey(options)
 });
+
+export const orderCreateMutation = (options?: Partial<Options<OrderCreateData>>): UseMutationOptions<OrderCreateResponse, OrderCreateError, Options<OrderCreateData>> => {
+    const mutationOptions: UseMutationOptions<OrderCreateResponse, OrderCreateError, Options<OrderCreateData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await orderCreate({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
+
+export const orderCancelMutation = (options?: Partial<Options<OrderCancelData>>): UseMutationOptions<OrderCancelResponse, OrderCancelError, Options<OrderCancelData>> => {
+    const mutationOptions: UseMutationOptions<OrderCancelResponse, OrderCancelError, Options<OrderCancelData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await orderCancel({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
 
 export const productSearchMutation = (options?: Partial<Options<ProductSearchData>>): UseMutationOptions<ProductSearchResponse, ProductSearchError, Options<ProductSearchData>> => {
     const mutationOptions: UseMutationOptions<ProductSearchResponse, ProductSearchError, Options<ProductSearchData>> = {

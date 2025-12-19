@@ -5,8 +5,24 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      redirect: 'products',
+    },
+    {
+      path: '/products',
       name: 'products',
-      component: () => import('../pages/Products'),
+      component: () => import('@/pages/Products'),
+    },
+    {
+      name: 'product',
+      path: '/products/:id',
+      component: () => import('@/pages/Products/ProductPage.vue'),
+      props: true,
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('@/pages/Checkout'),
     },
   ],
 })

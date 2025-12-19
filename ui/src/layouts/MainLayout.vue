@@ -13,7 +13,9 @@ const visible = ref(false)
   <header class="pr-0">
     <Toolbar>
       <template #start>
-        <Button class="mr-2" severity="secondary"> {{ brand }} </Button>
+        <router-link to="/">
+          <Button class="mr-2" severity="secondary"> {{ brand }} </Button>
+        </router-link>
       </template>
 
       <template #center>
@@ -42,7 +44,7 @@ const visible = ref(false)
       </template>
     </Toolbar>
   </header>
-  <main class="px-6">
+  <main class="py-4 px-12">
     <slot />
   </main>
   <ShoppingCartDrawer v-model:visible="visible" />

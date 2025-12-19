@@ -14,3 +14,15 @@ body {
   margin: 0;
   min-height: 100vh;
 }
+
+h1 {
+  @apply text-6xl;
+  font-weight: bold;
+}
+h2 {
+  @apply text-5xl;
+  font-weight: bold;
+}
+h3 {
+  @apply text-4xl;
+}

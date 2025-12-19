@@ -3,15 +3,15 @@ repos:
   - repo: local
     hooks:
       - id: api-hooks
-        name: PHPStan Check (API Dir Only)
+        name: API Check (API Dir Only)
         # This is the command that pre-commit will run
-        entry: bash -c "cd api &&composer pre-commit"
+        entry: bash -c "cd api && composer pre-commit"
         language: system # Use system because PHPStan is already installed via Composer
         files: '\.php$' # Check files ending in .php
         # key step: only run if changes are in the API directory
         exclude: '^(ui)/'
       - id: ui-hooks
         name: Prettier Check (UI Dir Only)
-        entry: bash -c "cd ui && bun run precommit"
+        entry: bash -c "cd ui && bun run pre-commit"
         language: system
         files: ^ui/  # Only runs if files in the /ui directory change
