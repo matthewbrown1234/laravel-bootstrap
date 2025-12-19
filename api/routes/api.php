@@ -9,3 +9,7 @@ Route::post('products:search', [ProductController::class, 'search']);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('orders', OrderController::class);
 // });
+
+//Route::get('/debug-info', function () {
+//    phpinfo();
+//});

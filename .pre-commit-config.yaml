@@ -5,7 +5,7 @@ repos:
       - id: api-hooks
         name: PHPStan Check (API Dir Only)
         # This is the command that pre-commit will run
-        entry: composer pre-commit -d api
+        entry: bash -c "cd api &&composer pre-commit"
         language: system # Use system because PHPStan is already installed via Composer
         files: '\.php$' # Check files ending in .php
         # key step: only run if changes are in the API directory

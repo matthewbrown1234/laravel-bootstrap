@@ -1,3 +1,10 @@
 [hooks]
 enter = '''
+echo "Setting API path & alias"
 '''
+
+[env]
+_.path="./vendor/bin"
+[alias]
+artisan="php artisan"
+sart="./vendor/bin/sail artisan"
