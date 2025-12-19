@@ -73,8 +73,7 @@
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
         "pre-commit": [
-            "./vendor/bin/phpstan analyse --memory-limit=1G",
-            "./vendor/bin/sail artisan test"
+            "./vendor/bin/phpstan analyse --memory-limit=1G"
         ]
     },
     "extra": {

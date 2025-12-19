@@ -8,4 +8,5 @@ use App\Domains\Order\Models\Order;
 interface OrderServiceInterface
 {
     public function createOrder(CreateOrderDto $orderItems): Order;
+    public function cancelOrder(string $orderId): Order;
 }

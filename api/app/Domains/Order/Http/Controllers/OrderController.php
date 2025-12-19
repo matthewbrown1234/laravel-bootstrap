@@ -4,6 +4,7 @@ namespace App\Domains\Order\Http\Controllers;
 
 use App\Contracts\SortBy;
 use App\Domains\Order\Contracts\OrderServiceInterface;
+use App\Domains\Order\Http\Requests\CancelOrderRequest;
 use App\Domains\Order\Http\Requests\CreateOrderRequest;
 use App\Domains\Order\Http\Requests\PageableOrderRequest;
 use App\Domains\Order\Http\Resources\OrderCollection;
@@ -45,5 +46,15 @@ class OrderController
     public function store(CreateOrderRequest $request)
     {
         return new OrderDetailResource($this->orderService->createOrder($request->toDto()));
+    }
+
+    public function create(CreateOrderRequest $request)
+    {
+        return new OrderDetailResource($this->orderService->createOrder($request->toDto()));
+    }
+
+    public function cancel(CancelOrderRequest $request)
+    {
+        return new OrderDetailResource($this->orderService->cancelOrder($request->getOrderId()));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Domains\Order\Http\Resources;
 
 use App\Domains\Order\Models\OrderItem;
+use App\Domains\Product\Utils\ProductUtils;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +16,7 @@ class OrderItemResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
+            'formattedPrice' => ProductUtils::getFormattedPrice($this->price),
             'extProductId' => $this->ext_product_id,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

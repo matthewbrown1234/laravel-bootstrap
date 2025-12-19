@@ -2,7 +2,12 @@
 
 use App\Domains\Product\Models\Product;
 
+it('print env', function () {
+     var_dump(getenv());
+});
+
 it('returns a single product by id', function () {
+     var_dump(getenv());
     $product = Product::factory()->createOne([
         'name' => 'Prod A',
         'description' => 'Desc A',

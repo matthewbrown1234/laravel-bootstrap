@@ -62,4 +62,12 @@ class OrderService implements OrderServiceInterface
             return $order;
         });
     }
+
+    public function cancelOrder(string $orderId): Order
+    {
+        $order = Order::query()->findOrFail($orderId);
+        $order->status = OrderStatus::CANCELLED;
+        $order->save();
+        return $order;
+    }
 }

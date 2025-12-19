@@ -3,6 +3,7 @@
 namespace App\Domains\Order\Http\Resources;
 
 use App\Domains\Order\Models\Order;
+use App\Domains\Product\Utils\ProductUtils;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,6 +21,7 @@ class OrderDetailResource extends JsonResource
             'id' => $this->id,
             'orderNumber' => $this->order_number,
             'subTotal' => $this->whenNotNull($this->getSubTotal()),
+            'formattedSubTotal' => $this->whenNotNull($this->getSubTotal() != null ? ProductUtils::getFormattedPrice($this->getSubTotal()) : null),
             'invoices' => $this->whenLoaded('invoices', fn() => InvoiceResource::collection($this->invoices)),
             'orderItems' => $orderItems,
             'createdAt' => $this->created_at,
