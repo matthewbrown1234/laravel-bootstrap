@@ -4,11 +4,11 @@ namespace App\Domains\Order\Services;
 
 use App\Domains\Order\Contracts\OrderServiceInterface;
 use App\Domains\Order\DataTransferObjects\CreateOrderDto;
+use App\Domains\Order\Events\OrderCompletedEvent;
 use App\Domains\Order\Models\Order;
 use App\Domains\Order\Models\OrderItem;
 use App\Domains\Order\Models\OrderStatus;
 use App\Domains\Product\Contracts\ProductServiceInterface;
-use App\Domains\Product\Models\Product;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Symfony\Component\Uid\Ulid;
@@ -78,6 +78,8 @@ class OrderService implements OrderServiceInterface
             ->where('status', '=', OrderStatus::LOCKED)
             ->firstOrFail();
         $order->status = OrderStatus::ORDERED;
+        $order->save();
+        OrderCompletedEvent::dispatch($order);
         return $order;
     }
 }

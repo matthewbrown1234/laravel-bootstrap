@@ -5,6 +5,7 @@ namespace App\Domains\Order\Http\Controllers;
 use App\Contracts\SortBy;
 use App\Domains\Order\Contracts\OrderServiceInterface;
 use App\Domains\Order\Http\Requests\CancelOrderRequest;
+use App\Domains\Order\Http\Requests\CompleteOrderRequest;
 use App\Domains\Order\Http\Requests\CreateOrderRequest;
 use App\Domains\Order\Http\Requests\PageableOrderRequest;
 use App\Domains\Order\Http\Resources\OrderCollection;
@@ -58,8 +59,8 @@ class OrderController
         return new OrderDetailResource($this->orderService->cancelOrder($request->getOrderId()));
     }
 
-    public function complete(string $orderId)
+    public function complete(CompleteOrderRequest $request)
     {
-        return new OrderDetailResource($this->orderService->completeOrdered($orderId));
+        return new OrderDetailResource($this->orderService->completeOrdered($request->getOrderId()));
     }
 }

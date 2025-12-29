@@ -19,7 +19,7 @@ class AbandonedOrderCleanupJob implements ShouldQueue
     {
         Order::Query()
             ->whereIn('status', [OrderStatus::ABANDONED])
-            ->where('updated_at', '<', now()->subHours(10))
+            ->where('updated_at', '<', now()->subHours(1))
             ->delete();
     }
 }
