@@ -30,7 +30,7 @@ class OrderService implements OrderServiceInterface
             throw new InvalidArgumentException('Order Items cannot be empty');
         }
 
-        $products = $this->productService->findProducts(array_map(fn ($i) => $i->extProductId, $request->items));
+        $products = $this->productService->findProducts(array_map(fn($i) => $i->extProductId, $request->items));
 
         if (count($products) !== count($request->items)) {
             throw new InvalidArgumentException('Invalid Product Id');
@@ -68,6 +68,16 @@ class OrderService implements OrderServiceInterface
         $order = Order::query()->findOrFail($orderId);
         $order->status = OrderStatus::CANCELLED;
         $order->save();
+        return $order;
+    }
+
+    public function completeOrdered(string $orderId): Order
+    {
+        $order = Order::query()
+            ->find($orderId)
+            ->where('status', '=', OrderStatus::LOCKED)
+            ->firstOrFail();
+        $order->status = OrderStatus::ORDERED;
         return $order;
     }
 }

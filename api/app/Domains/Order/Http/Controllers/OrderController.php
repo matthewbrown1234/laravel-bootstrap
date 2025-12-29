@@ -57,4 +57,9 @@ class OrderController
     {
         return new OrderDetailResource($this->orderService->cancelOrder($request->getOrderId()));
     }
+
+    public function complete(string $orderId)
+    {
+        return new OrderDetailResource($this->orderService->completeOrdered($orderId));
+    }
 }

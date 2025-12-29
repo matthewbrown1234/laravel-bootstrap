@@ -9,4 +9,5 @@ interface OrderServiceInterface
 {
     public function createOrder(CreateOrderDto $orderItems): Order;
     public function cancelOrder(string $orderId): Order;
+    public function completeOrdered(string $orderId): Order;
 }

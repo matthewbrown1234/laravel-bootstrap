@@ -10,6 +10,7 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('orders', OrderController::class);
 Route::post('orders:create', [OrderController::class, 'create']);
 Route::post('orders:cancel', [OrderController::class, 'cancel']);
+Route::post('orders:complete', [OrderController::class, 'complete']);
 // });
 
 //Route::get('/debug-info', function () {
