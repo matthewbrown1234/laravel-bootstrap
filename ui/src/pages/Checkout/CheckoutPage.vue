@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { useMutation, useQuery } from '@tanstack/vue-query'
 import {
   orderCancelMutation,
+  orderCompleteMutation,
   orderCreateMutation,
   ordersShowOptions,
 } from '@/client/@tanstack/vue-query.gen.ts'
@@ -23,6 +24,11 @@ const {
 } = useMutation({
   ...orderCancelMutation(),
 })
+const {
+  error: completeOrderError,
+  isPending: completeOrderIsPending,
+  mutateAsync: completeOrderAsync,
+} = useMutation({ ...orderCompleteMutation() })
 
 const maybeOrderId = computed(() => orderData.value?.data.id)
 
@@ -57,9 +63,25 @@ onBeforeUnmount(() => {
 })
 
 const isPending = computed(
-  () => createOrderIsPending.value || dataIsLoading.value || cancelOrderIsPending.value,
+  () =>
+    createOrderIsPending.value ||
+    dataIsLoading.value ||
+    cancelOrderIsPending.value ||
+    completeOrderIsPending.value,
 )
-const error = computed(() => createOrderError.value || dataError.value || cancelOrderError.value)
+const error = computed(
+  () =>
+    createOrderError.value || dataError.value || cancelOrderError.value || completeOrderError.value,
+)
+
+const onCompleteOrder = () => {
+  if (!orderData.value) return
+  completeOrderAsync({
+    body: {
+      orderId: orderData.value.data.id,
+    },
+  })
+}
 </script>
 
 <template>
@@ -68,7 +90,18 @@ const error = computed(() => createOrderError.value || dataError.value || cancel
     <ProgressSpinner />
   </div>
   <div v-if="detailedOrderData" class="flex row gap-4 w-full">
-    <div class="min-w-3/5">[Shipping info here]</div>
+    <div class="min-w-3/5 flex flex-col justify-between">
+      <div>[Shipping info here]</div>
+      <div class="">
+        <Button
+          :disabled="orderData?.data.id == null"
+          @click="onCompleteOrder"
+          class="w-full"
+          size="large"
+          label="Complete Order"
+        />
+      </div>
+    </div>
     <div class="min-w-2/5 flex flex-col gap-2 px-8">
       <Card v-for="orderItem in detailedOrderData.data.orderItems" :key="orderItem.id">
         <template #content>

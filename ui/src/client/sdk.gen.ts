@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { OrderCancelData, OrderCancelErrors, OrderCancelResponses, OrderCreateData, OrderCreateErrors, OrderCreateResponses, OrdersIndexData, OrdersIndexErrors, OrdersIndexResponses, OrdersShowData, OrdersShowResponses, OrdersStoreData, OrdersStoreErrors, OrdersStoreResponses, ProductSearchData, ProductSearchErrors, ProductSearchResponses, ProductsIndexData, ProductsIndexErrors, ProductsIndexResponses, ProductsShowData, ProductsShowErrors, ProductsShowResponses } from './types.gen';
+import type { OrderCancelData, OrderCancelErrors, OrderCancelResponses, OrderCompleteData, OrderCompleteErrors, OrderCompleteResponses, OrderCreateData, OrderCreateErrors, OrderCreateResponses, OrdersIndexData, OrdersIndexErrors, OrdersIndexResponses, OrdersShowData, OrdersShowResponses, OrdersStoreData, OrdersStoreErrors, OrdersStoreResponses, ProductSearchData, ProductSearchErrors, ProductSearchResponses, ProductsIndexData, ProductsIndexErrors, ProductsIndexResponses, ProductsShowData, ProductsShowErrors, ProductsShowResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -45,6 +45,15 @@ export const orderCreate = <ThrowOnError extends boolean = false>(options: Optio
 
 export const orderCancel = <ThrowOnError extends boolean = false>(options: Options<OrderCancelData, ThrowOnError>) => (options.client ?? client).post<OrderCancelResponses, OrderCancelErrors, ThrowOnError>({
     url: '/api/orders:cancel',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const orderComplete = <ThrowOnError extends boolean = false>(options: Options<OrderCompleteData, ThrowOnError>) => (options.client ?? client).post<OrderCompleteResponses, OrderCompleteErrors, ThrowOnError>({
+    url: '/api/orders:complete',
     ...options,
     headers: {
         'Content-Type': 'application/json',

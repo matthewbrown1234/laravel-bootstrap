@@ -3,8 +3,8 @@
 import { type DefaultError, type InfiniteData, infiniteQueryOptions, queryOptions, type UseMutationOptions } from '@tanstack/vue-query';
 
 import { client } from '../client.gen';
-import { type Options, orderCancel, orderCreate, ordersIndex, ordersShow, ordersStore, productSearch, productsIndex, productsShow } from '../sdk.gen';
-import type { OrderCancelData, OrderCancelError, OrderCancelResponse, OrderCreateData, OrderCreateError, OrderCreateResponse, OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductSearchData, ProductSearchError, ProductSearchResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
+import { type Options, orderCancel, orderComplete, orderCreate, ordersIndex, ordersShow, ordersStore, productSearch, productsIndex, productsShow } from '../sdk.gen';
+import type { OrderCancelData, OrderCancelError, OrderCancelResponse, OrderCompleteData, OrderCompleteError, OrderCompleteResponse, OrderCreateData, OrderCreateError, OrderCreateResponse, OrdersIndexData, OrdersIndexError, OrdersIndexResponse, OrdersShowData, OrdersShowResponse, OrdersStoreData, OrdersStoreError, OrdersStoreResponse, ProductSearchData, ProductSearchError, ProductSearchResponse, ProductsIndexData, ProductsIndexError, ProductsIndexResponse, ProductsShowData, ProductsShowError, ProductsShowResponse } from '../types.gen';
 
 export type QueryKey<TOptions extends Options> = [
     Pick<TOptions, 'baseUrl' | 'body' | 'headers' | 'path' | 'query'> & {
@@ -160,6 +160,20 @@ export const orderCancelMutation = (options?: Partial<Options<OrderCancelData>>)
     const mutationOptions: UseMutationOptions<OrderCancelResponse, OrderCancelError, Options<OrderCancelData>> = {
         mutationFn: async (fnOptions) => {
             const { data } = await orderCancel({
+                ...options,
+                ...fnOptions,
+                throwOnError: true
+            });
+            return data;
+        }
+    };
+    return mutationOptions;
+};
+
+export const orderCompleteMutation = (options?: Partial<Options<OrderCompleteData>>): UseMutationOptions<OrderCompleteResponse, OrderCompleteError, Options<OrderCompleteData>> => {
+    const mutationOptions: UseMutationOptions<OrderCompleteResponse, OrderCompleteError, Options<OrderCompleteData>> = {
+        mutationFn: async (fnOptions) => {
+            const { data } = await orderComplete({
                 ...options,
                 ...fnOptions,
                 throwOnError: true

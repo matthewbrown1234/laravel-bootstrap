@@ -12,6 +12,13 @@ export type CancelOrderRequest = {
 };
 
 /**
+ * CompleteOrderRequest
+ */
+export type CompleteOrderRequest = {
+    orderId: string;
+};
+
+/**
  * CreateOrderRequest
  */
 export type CreateOrderRequest = {
@@ -85,7 +92,7 @@ export type OrderResource = {
 /**
  * OrderStatus
  */
-export type OrderStatus = 'abandoned' | 'locked' | 'warehouse' | 'delivered' | 'cancelled' | 'refunded';
+export type OrderStatus = 'abandoned' | 'locked' | 'cancelled' | 'ordered' | 'processing' | 'closed';
 
 /**
  * ProductCollection
@@ -325,6 +332,44 @@ export type OrderCancelResponses = {
 };
 
 export type OrderCancelResponse = OrderCancelResponses[keyof OrderCancelResponses];
+
+export type OrderCompleteData = {
+    body: CompleteOrderRequest;
+    path?: never;
+    query?: never;
+    url: '/api/orders:complete';
+};
+
+export type OrderCompleteErrors = {
+    /**
+     * Validation error
+     */
+    422: {
+        /**
+         * Errors overview.
+         */
+        message: string;
+        /**
+         * A detailed description of each field that failed validation.
+         */
+        errors: {
+            [key: string]: Array<string>;
+        };
+    };
+};
+
+export type OrderCompleteError = OrderCompleteErrors[keyof OrderCompleteErrors];
+
+export type OrderCompleteResponses = {
+    /**
+     * `OrderDetailResource`
+     */
+    200: {
+        data: OrderDetailResource;
+    };
+};
+
+export type OrderCompleteResponse = OrderCompleteResponses[keyof OrderCompleteResponses];
 
 export type ProductSearchData = {
     body?: SearchProductsRequest;
