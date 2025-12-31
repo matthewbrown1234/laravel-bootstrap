@@ -9,6 +9,7 @@ use App\Domains\Order\Models\Order;
 use App\Domains\Order\Models\OrderItem;
 use App\Domains\Order\Models\OrderStatus;
 use App\Domains\Product\Contracts\ProductServiceInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Symfony\Component\Uid\Ulid;
@@ -79,7 +80,7 @@ class OrderService implements OrderServiceInterface
             ->firstOrFail();
         $order->status = OrderStatus::ORDERED;
         $order->save();
-        OrderCompletedEvent::dispatch($order);
+        OrderCompletedEvent::dispatch($order->id, Carbon::now());
         return $order;
     }
 }

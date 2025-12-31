@@ -8,6 +8,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 return Application::configure(basePath: dirname(__DIR__))
     ->withEvents(discover: [
         __DIR__.'/../app/Domains/Order/Listeners',
+        __DIR__.'/../app/Domains/Fulfillment/Listeners',
     ])
     ->withRouting(
         api: __DIR__.'/../routes/api.php',

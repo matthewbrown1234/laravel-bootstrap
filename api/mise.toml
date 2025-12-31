@@ -8,3 +8,4 @@ _.path="./vendor/bin"
 [shell_alias]
 artisan="php artisan"
 sart="./vendor/bin/sail artisan"
+pail="sail artisan pail"
