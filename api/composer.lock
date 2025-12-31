@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17d7725d1d6a0d6389949f31d356a49c",
+    "content-hash": "208c269c014be6170c6c8f30205971ea",
     "packages": [
         {
             "name": "brick/math",
@@ -1054,16 +1054,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.42.0",
+            "version": "v12.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "509b33095564c5165366d81bbaa0afaac28abe75"
+                "reference": "592bbf1c036042958332eb98e3e8131b29102f33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/509b33095564c5165366d81bbaa0afaac28abe75",
-                "reference": "509b33095564c5165366d81bbaa0afaac28abe75",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/592bbf1c036042958332eb98e3e8131b29102f33",
+                "reference": "592bbf1c036042958332eb98e3e8131b29102f33",
                 "shasum": ""
             },
             "require": {
@@ -1272,7 +1272,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-12-09T15:51:23+00:00"
+            "time": "2025-12-23T15:29:43+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -6449,16 +6449,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.13.8",
+            "version": "v0.13.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "f6b1fc05c34aa58e57b67fc43893f19e1b539e83"
+                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/f6b1fc05c34aa58e57b67fc43893f19e1b539e83",
-                "reference": "f6b1fc05c34aa58e57b67fc43893f19e1b539e83",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/fd73178629c0a5ddc59eeac4fd605d4820b60f11",
+                "reference": "fd73178629c0a5ddc59eeac4fd605d4820b60f11",
                 "shasum": ""
             },
             "require": {
@@ -6517,7 +6517,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.13.8"
+                "source": "https://github.com/dedoc/scramble/tree/v0.13.10"
             },
             "funding": [
                 {
@@ -6525,7 +6525,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-08T13:06:30+00:00"
+            "time": "2025-12-29T08:30:07+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -10217,11 +10217,12 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.5"
+        "php": "^8.5",
+        "ext-intl": "*"
     },
     "platform-dev": {},
     "platform-overrides": {
         "php": "8.5"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
