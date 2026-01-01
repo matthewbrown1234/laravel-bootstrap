@@ -5,10 +5,14 @@ namespace App\Domains\Order\Listeners;
 use App\Domains\Order\Events\OrderCompletedEvent;
 use App\Domains\Order\Models\Order;
 use App\Domains\Order\Models\OrderStatus;
+use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class OrderCompletedListener
+class OrderCompletedListener implements ShouldQueue, ShouldHandleEventsAfterCommit
 {
+    public string $queue = 'order';
+
     public function __construct()
     {
     }

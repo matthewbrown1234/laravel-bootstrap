@@ -80,7 +80,7 @@ class OrderService implements OrderServiceInterface
             ->firstOrFail();
         $order->status = OrderStatus::ORDERED;
         $order->save();
-        OrderCompletedEvent::dispatch($order->id, Carbon::now());
+        event(new OrderCompletedEvent($order->id, Carbon::now()));
         return $order;
     }
 }
